@@ -5,6 +5,11 @@ pt-pdfslideshow {
     box-sizing: border-box;
 }
 
+
+pt-pdfslideshow[hidefooter] footer {
+    display: none;
+}
+
 pt-pdfslideshow pt-progressbar {
     float: left;
     margin-right: 10px;
