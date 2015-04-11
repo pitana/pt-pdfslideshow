@@ -1,0 +1,26 @@
+{
+  "name": "pt-pdfslideshow",
+  "version": "1.0.0",
+  "homepage": "https://github.com/pitana/pt-pdfslideshow",
+  "authors": [
+    "Narendra Sisodiya <narendra@narendrasisodiya.com>"
+  ],
+  "description": "Custom Element for pdf slideshow",
+  "main": "pt-pdfslideshow.html",
+  "keywords": [
+    "pdf"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "pt-progressbar": "~1.0.0",
+    "pitana.js": "~1.0.0",
+    "pdfjs-dist": "~1.1.52"
+  }
+}

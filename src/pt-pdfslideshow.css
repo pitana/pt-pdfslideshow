@@ -1,0 +1,67 @@
+
+pt-pdfslideshow {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+pt-pdfslideshow pt-progressbar {
+    float: left;
+    margin-right: 10px;
+    width: 65%;
+}
+pt-pdfslideshow .body canvas {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid rgb(45, 33, 47);
+    /*margin-left: 2px;*/
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+pt-pdfslideshow #prev {
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAQAAACR313BAAABFklEQVQYlWNgoBJ4xvVrMiMfIzuI/Z/5Zx0jDyMbXPK7/O8zfz4z2jBKMjB8Fvt94O8nRnNGMZik49+X////+M5YwKjx1fTvYzA7l1EDLPkj/9+v/0Dw6Bdj+5HGf99hbEZdkI2LQNwX/x/9v/Vn/WUQ+zWQfeM3YxdQGiJ5EwqfwtkXINJF0nf3nf8PgSf+zHgKYx+DSDNyMOosX3X477H/x/7v+824fPrBI/+gbLA0IyMno1pxw47P+/5v+804iTG4umXHNzAbJA0CjKyMMq5RWx5sALnWiFEmIHHz0w0Ql0MAIzOjEJ/Nkq0gvwLZwhJOK/aDwgAeakBLuBm1ISEFZPMy6jFaMUqghDojGyKcGdmBStgBsMWpEVd7QCQAAAAASUVORK5CYII=")
+}
+
+pt-pdfslideshow #next {
+
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAQAAACR313BAAAA5ElEQVQYV2NgoAh8r2HkYWQDsV7zIthw8P//y0N2RoxcjIzvBRBsJOnP/9+9boxkFDgpjGAzMsGlXwPh719rOxM1EGxGSUYWqPQjMHz9/+ohBPv8TnUNRnaw9E04RGafO8qoxcgBlD4PhfNenoezpz0VmsToxigAlD4GhIf/pl4TXopgM85lzGDUAeve93/dD4sjjBPV0xBsxihGNUZOoAf//5/5SGwzYxOjZ5Q2gs0ozcgKdvmteazljMWMVoxC+0UQbEZmqL8ZZRhtgbZwMzIyMiHY8FBjZGfkBfuQAagAzoYBAF1Ip53m5cgbAAAAAElFTkSuQmCC")
+
+}
+pt-pdfslideshow pt-progressbar .progress .progress-bar {
+    background-color: #FD0000;
+}
+
+pt-pdfslideshow footer {
+    background: rgb(45, 33, 47);
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    height: 20px;
+}
+pt-pdfslideshow .status {
+    align-content: center;
+    color: white;
+    float: right;
+    font-size: 15px;
+    font-weight: bold;
+    margin-right: 7px;
+    text-align: right;
+    width: 63px;
+}
+pt-pdfslideshow .btnIcon {
+    float: left;
+    background-repeat: no-repeat;
+    height: 9px;
+    margin-left: 7px;
+    margin-right: 7px;
+    margin-top: 2px;
+    opacity: 0.9;
+    padding: 2px;
+    transform: scale(1.3);
+    width: 10px;
+}
+pt-pdfslideshow .btnIcon:hover {
+    opacity: 1;
+}

@@ -1,0 +1,20 @@
+<link rel="import" href="../../pt-progressbar/src/pt-progressbar.html">
+<script src="../../pdfjs-dist/build/pdf.js"></script>
+<script>
+    PDFJS.workerSrc = "bower_components/pdfjs-dist/build/pdf.worker.js";
+</script>
+<template>
+    <div class="body">
+        <canvas id="the-canvas"></canvas>
+    </div>
+    <footer class="flex-container">
+        <span class="btnIcon" id="prev" title="Previous"></span>
+        <span class="btnIcon" id="next" title="Next"></span>
+        <!--<pt-progressbar class="flex-item"></pt-progressbar>-->
+        <span class="status"><span id="page_num"></span> / <span id="page_count"></span></span>
+    </footer>
+</template>
+
+<link charset='utf-8' href='pt-pdfslideshow.css' rel='stylesheet'>
+
+<script src="pt-pdfslideshow.js"></script>
