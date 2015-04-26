@@ -3,8 +3,6 @@
  */
 
 //TODO - Arrow key navigation !!
-//TODO - Click on Progressbar must navigate to new page..
-
 pitana.register({
   tagName: "pt-pdfslideshow",
   template: document._currentScript.ownerDocument.querySelector("template"),
@@ -20,7 +18,16 @@ pitana.register({
   },
   events:{
     "click #next":"onNextPage",
-    "click #prev":"onPrevPage"
+    "click #prev":"onPrevPage",
+    "click pt-progressbar": "onProgressBarClick"
+  },
+  onProgressBarClick: function (e) {
+    var requestedPage = Math.ceil((e.clientX - this.bar.offsetLeft)/this.bar.offsetWidth*this.bar.max);
+    if (requestedPage > this.bar.max || requestedPage < 1) {
+      return;
+    }else{
+      this.$.currentPage = requestedPage;
+    }
   },
   attachedCallback: function () {
     /*Add progressbar - Chrome bug*/
@@ -45,7 +52,6 @@ pitana.register({
     this.bar.value = 0;
     this.bar.intermediate = false;
     PDFJS.getDocument(this.$.src, null, null, function(progress){
-      console.log(progress);
       if(self.bar.max !== progress.total){
         if(progress.total === null || progress.total === undefined){
           self.bar.intermediate = true
