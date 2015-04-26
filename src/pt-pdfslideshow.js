@@ -2,7 +2,6 @@
  * Created by narendra on 3/4/15.
  */
 
-//TODO - Arrow key navigation !!
 pitana.register({
   tagName: "pt-pdfslideshow",
   template: document._currentScript.ownerDocument.querySelector("template"),
@@ -19,7 +18,8 @@ pitana.register({
   events:{
     "click #next":"onNextPage",
     "click #prev":"onPrevPage",
-    "click pt-progressbar": "onProgressBarClick"
+    "click pt-progressbar": "onProgressBarClick",
+    "keyup": "onKeyup"
   },
   onProgressBarClick: function (e) {
     var requestedPage = Math.ceil((e.clientX - this.bar.offsetLeft)/this.bar.offsetWidth*this.bar.max);
@@ -29,6 +29,20 @@ pitana.register({
       this.$.currentPage = requestedPage;
     }
   },
+  onKeyup: function (e) {
+    var code = {
+      RIGHT_KEY : 39,
+      LEFT_KEY : 37
+    };
+    switch(e.keyCode){
+      case code.RIGHT_KEY:
+        this.onNextPage();
+        break;
+      case code.LEFT_KEY:
+        this.onPrevPage();
+        break;
+    }
+  },
   attachedCallback: function () {
     /*Add progressbar - Chrome bug*/
     var referenceNode = this.$.querySelector("#next");
@@ -36,6 +50,7 @@ pitana.register({
 
     this.pdfDoc = null;
 
+    this.$.setAttribute("tabindex", "-1");
     this.pageRendering = false;
     this.pageNumPending = null;
     this.scale = 1;
