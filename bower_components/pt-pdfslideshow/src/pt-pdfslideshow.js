@@ -49,6 +49,7 @@ pitana.register({
     referenceNode.parentNode.insertBefore(document.createElement("pt-progressbar"), referenceNode.nextSibling);
 
     this.pdfDoc = null;
+    this.pdfLoaded = false;
 
     this.$.setAttribute("tabindex", "-1");
     this.pageRendering = false;
@@ -67,24 +68,30 @@ pitana.register({
     this.bar.value = 0;
     this.bar.intermediate = false;
     PDFJS.getDocument(this.$.src, null, null, function(progress){
-      if(self.bar.max !== progress.total){
-        if(progress.total === null || progress.total === undefined){
-          self.bar.intermediate = true
-        }else{
-          self.bar.max = progress.total;
-        }
-      }
-      if(progress.loaded > self.bar.value){
-        self.bar.value = progress.loaded;
-      }
+      self.onProgress(progress);
     }).then(function (pdfDoc) {
       self.onPdfLoaded(pdfDoc);
     });
   },
+  onProgress: function (progress) {
+    if(this.pdfLoaded === true){
+      return;
+    }
+    if(this.bar.max !== progress.total){
+      if(progress.total === null || progress.total === undefined){
+        this.bar.intermediate = true
+      }else{
+        this.bar.max = progress.total;
+      }
+    }
+    if(progress.loaded > this.bar.value){
+      this.bar.value = progress.loaded;
+    }
+  },
   onPdfLoaded: function (pdfDoc) {
+    this.pdfLoaded = true;
     this.pdfDoc = pdfDoc;
     this.$.querySelector('#page_count').textContent = this.pdfDoc.numPages;
-
     this.bar.intermediate = false;
     this.bar.max = this.pdfDoc.numPages;
     this.$.currentPage = 1;

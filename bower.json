@@ -19,6 +19,6 @@
     "tests"
   ],
   "dependencies": {
-    "pt-pdfslideshow": "~1.0.2"
+    "pt-pdfslideshow": "~1.0.3"
   }
 }
