@@ -5,7 +5,7 @@
 //TODO - Arrow key navigation !!
 //TODO - Click on Progressbar must navigate to new page..
 
-pitana.registerElement(pitana.HTMLElement.extend({
+pitana.register({
   tagName: "pt-pdfslideshow",
   template: document._currentScript.ownerDocument.querySelector("template"),
   accessors:{
@@ -22,12 +22,6 @@ pitana.registerElement(pitana.HTMLElement.extend({
     "click #next":"onNextPage",
     "click #prev":"onPrevPage"
   },
-  initialize: function () {
-    pitana.HTMLElement.apply(this, arguments);
-  },
-  createdCallback: function () {
-
-  },
   attachedCallback: function () {
     /*Add progressbar - Chrome bug*/
     var referenceNode = this.$.querySelector("#next");
@@ -40,26 +34,29 @@ pitana.registerElement(pitana.HTMLElement.extend({
     this.scale = 1;
     this.canvas = this.$.querySelector('#the-canvas');
     this.ctx = this.canvas.getContext('2d');
-    this.loadPdf();
-  },
-  detachedCallback: function () {
-    console.log("I am ending " + this.tagName);
-  },
-  attributeChangedCallback: function (attrName, oldVal, newVal) {
-  },
-  render: function () {
-    //this.$.innerHTML = '<div class="body"><canvas id="the-canvas"></canvas></div>' +
-    //'<footer class="flex-container">' +
-    //'<span class="btnIcon" id="prev" title="Previous"></span>' +
-    //'<span class="btnIcon" id="next" title="Next"></span>' +
-    //'<pt-progressbar class="flex-item"></pt-progressbar>' +
-    //'<span class="status"><span id="page_num"></span> / <span id="page_count"></span></span>' +
-    //'</footer>';
-
+    var self = this;
+    window.setTimeout(function () {
+      self.loadPdf();
+    }, 0);
   },
   loadPdf: function () {
     var self = this;
-    PDFJS.getDocument(this.$.src).then(function (pdfDoc) {
+    this.bar = this.$.querySelector("pt-progressbar");
+    this.bar.value = 0;
+    this.bar.intermediate = false;
+    PDFJS.getDocument(this.$.src, null, null, function(progress){
+      console.log(progress);
+      if(self.bar.max !== progress.total){
+        if(progress.total === null || progress.total === undefined){
+          self.bar.intermediate = true
+        }else{
+          self.bar.max = progress.total;
+        }
+      }
+      if(progress.loaded > self.bar.value){
+        self.bar.value = progress.loaded;
+      }
+    }).then(function (pdfDoc) {
       self.onPdfLoaded(pdfDoc);
     });
   },
@@ -67,7 +64,8 @@ pitana.registerElement(pitana.HTMLElement.extend({
     this.pdfDoc = pdfDoc;
     this.$.querySelector('#page_count').textContent = this.pdfDoc.numPages;
 
-    this.$.querySelector("pt-progressbar").max = this.pdfDoc.numPages;
+    this.bar.intermediate = false;
+    this.bar.max = this.pdfDoc.numPages;
     this.$.currentPage = 1;
   },
   renderPage: function (num) {
@@ -102,7 +100,7 @@ pitana.registerElement(pitana.HTMLElement.extend({
     this.queueRenderPage(this.$.currentPage);
     ////We are trigger currentPageChange event so that outside work can get to now about current state of pdf slidesohw.
     //this.trigger("currentPageChange");
-    this.$.querySelector("pt-progressbar").value = this.$.currentPage;
+    this.bar.value = this.$.currentPage;
   },
   onNextPage: function () {
     if (this.$.currentPage >= this.pdfDoc.numPages) {
@@ -123,4 +121,4 @@ pitana.registerElement(pitana.HTMLElement.extend({
       this.renderPage(num);
     }
   }
-}));
+});

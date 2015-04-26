@@ -1,6 +1,6 @@
 {
   "name": "pt-pdfslideshow",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "https://github.com/pitana/pt-pdfslideshow",
   "authors": [
     "Narendra Sisodiya <narendra@narendrasisodiya.com>"
@@ -20,7 +20,7 @@
   ],
   "dependencies": {
     "pt-progressbar": "~1.0.0",
-    "pitana.js": "~1.0.0",
+    "pitana.js": "~1.0.3",
     "pdfjs-dist": "~1.1.52"
   }
 }
